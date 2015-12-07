@@ -178,7 +178,6 @@ ActiveRecord::Schema.define(version: 20151207044811) do
     t.string   "student_names"
     t.text     "note"
     t.string   "location"
-    t.boolean  "open",          default: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"
