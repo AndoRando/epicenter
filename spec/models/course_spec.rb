@@ -3,6 +3,7 @@ describe Course do
   it { should have_many(:attendance_records).through(:students) }
   it { should have_many :code_reviews }
   it { should have_many :internships}
+  it { should have_many :tickets}
 
   describe "validations" do
     it "validates the presence of description" do
@@ -28,6 +29,15 @@ describe Course do
     it "validates the presence of end_time" do
       course = FactoryGirl.build(:course, end_time: nil)
       expect(course).to_not be_valid
+    end
+  end
+
+  describe '#in_session' do
+    let(:in_session_course) { FactoryGirl.create(:course) }
+    let(:past_course) { FactoryGirl.create(:past_course) }
+
+    it 'returns courses that are in session' do
+      expect(Course.in_session).to eq [in_session_course]
     end
   end
 

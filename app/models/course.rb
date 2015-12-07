@@ -1,6 +1,7 @@
 class Course < ActiveRecord::Base
   default_scope { order(:start_date) }
   scope :with_code_reviews, -> { includes(:code_reviews).where.not(code_reviews: { id: nil }) }
+  scope :in_session, -> { where('start_date <= ? AND end_date >= ?', Time.zone.now.to_date, Time.zone.now.to_date) }
 
   validates :description, presence: true
   validates :start_date, presence: true
@@ -14,6 +15,7 @@ class Course < ActiveRecord::Base
   has_many :attendance_records, through: :students
   has_many :code_reviews
   has_many :internships
+  has_many :tickets
 
   serialize :class_days, Array
 
