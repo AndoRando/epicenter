@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'static_pages#index'
   get 'attendance', to: 'attendance_records#index', as: 'attendance'
+  get 'queue', to: 'tickets#index'
+  get 'help', to: 'tickets#new'
 
   devise_for :student, :controllers => { :invitations => 'invitations', :registrations => 'registrations' }
   devise_for :admins, skip: :registrations
@@ -60,4 +62,5 @@ Rails.application.routes.draw do
   resource :code_review_copy, only: [:create]
   resource :random_pairs, only: [:show]
   resources :enrollments, only: [:create, :destroy]
+  resources :tickets, except: [:index, :new]
 end
