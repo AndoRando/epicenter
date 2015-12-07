@@ -14,8 +14,6 @@ module ApplicationHelper
     current_page?(attendance_path) ||
     current_page?(queue_path) ||
     current_page?(help_path) ||
-    if params[:controller] == 'tickets'
-      current_page?(ticket_path)
-    end
+    current_page?(ticket_path) if params[:controller] == 'tickets'
   end
 end
